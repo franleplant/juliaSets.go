@@ -14,13 +14,7 @@ import (
 const (
 	ER             = 1
 	N              = 500
-	M              = N
 	MIN_x          = float64(-1.0)
-	MAX_x          = -MIN_x
-	MIN_y          = MIN_x
-	MAX_y          = MAX_x
-	STEP_x         = (MAX_x - MIN_y) / M
-	STEP_y         = (MAX_y - MIN_y) / N
 	c              = c7
 	c1             = -0.4 + 0.6i //nice
 	c2             = -0.285 + 0.1i
@@ -39,7 +33,7 @@ func fz1(z complex128) complex128 {
 }
 func main() {
 	getColor := utils.GetColorFactory(K_COLOR, PHASE)
-	escapeTime(fz1, getColor, N)
+	escapeTime(fz1, getColor, N, MIN_x)
 }
 
 // Sufficiently big enough matrix
@@ -52,13 +46,12 @@ var fzi = fz1
 var m CMatrix
 var z *complex128
 
-func escapeTime(fz fzType, getColor utils.GetColorType, N int) {
+func escapeTime(fz fzType, getColor utils.GetColorType, N int, MIN_x float64) {
 
 	var count int
 	var r, g, b uint8
 	var (
 		M      = N
-		MIN_x  = float64(-1.0)
 		MAX_x  = -MIN_x
 		MIN_y  = MIN_x
 		MAX_y  = MAX_x
