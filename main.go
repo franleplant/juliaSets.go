@@ -8,10 +8,7 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
-	"math"
 	"math/cmplx"
-
-	sadboxColor "code.google.com/p/sadbox/color"
 )
 
 const (
@@ -45,14 +42,10 @@ func fz1(z complex128) complex128 {
 	return cmplx.Pow(z, 2) + 0.279 + 0.0i
 }
 
+var fzi = fz1
+
 var m CMatrix
 var z *complex128
-
-func getColor(count int) (r, g, b uint8) {
-	//TODO: if count is 0 then return black and if is MAX_ITER then return white (or viceversa)
-	r, g, b = sadboxColor.HSVToRGB((math.Mod(PHASE+K_COLOR*float64(count), 255.0))/255.0, 1.0, 1.0)
-	return
-}
 
 func main() {
 
@@ -69,7 +62,7 @@ func main() {
 
 			for count = 0; count < MAX_ITERATIONS; count++ {
 				//*z = cmplx.Pow(*z, 2) + c
-				*z = fz1(*z)
+				*z = fzi(*z)
 				if cmplx.Abs(*z) > ER {
 					//fmt.Printf("count %v color %v ", count, (math.Mod(PHASE*float64(count), 255.0))/255.0)
 					break
@@ -80,7 +73,7 @@ func main() {
 				fmt.Println("Max Iterations reached")
 			}
 
-			r, g, b = getColor(count)
+			r, g, b = utils.GetColor(count, K_COLOR, PHASE)
 			//fmt.Printf("r %v g %v b %v \n", r, g, b)
 
 			draw.Draw(img, image.Rect(j, i, j+1, i+1), &image.Uniform{color.RGBA{r, g, b, 255}}, image.ZP, draw.Src)
