@@ -23,7 +23,7 @@ var z *complex128
 
 // fz is the f(z) that will be used to iterate over
 // getColor is a function that takes a count int and returns an RGB color
-// N is the size of the image to be generated (the image will be a square)
+// N is the size of the image to be generated (the image will be a square), 5000 is the max
 // MIX_x is the range from which the complex plane will be calculated and graphicated
 func EscapeTime(fz fzType, getColor utils.GetColorType, N int, MIN_x float64) {
 
