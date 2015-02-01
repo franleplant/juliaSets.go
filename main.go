@@ -1,5 +1,3 @@
-//TODO: improve the code
-
 package main
 
 import (
@@ -11,7 +9,6 @@ import (
 const (
 	N       = 500
 	MIN_x   = float64(-1.0)
-	c       = c7
 	c1      = -0.4 + 0.6i //nice
 	c2      = -0.285 + 0.1i
 	c3      = (1 - 1.618033987) + 0.0i //Golden ratio
