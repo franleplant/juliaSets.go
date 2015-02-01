@@ -4,13 +4,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/franleplant/juliaSets/utils"
 	"image"
 	"image/color"
 	"image/draw"
-	"image/jpeg"
 	"math"
 	"math/cmplx"
-	"os"
 
 	sadboxColor "code.google.com/p/sadbox/color"
 )
@@ -49,31 +48,18 @@ func fz1(z complex128) complex128 {
 var m CMatrix
 var z *complex128
 
-func saveImg(img *image.RGBA) {
-	out, err := os.Create("./output.jpg")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	var opt jpeg.Options
-
-	opt.Quality = 100
-	// ok, write out the data into the new JPEG file
-
-	// TODO: try png or other type of img encoding to see if it improves the quality
-	err = jpeg.Encode(out, img, &opt)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+func getColor(count int) (r, g, b uint8) {
+	//TODO: if count is 0 then return black and if is MAX_ITER then return white (or viceversa)
+	r, g, b = sadboxColor.HSVToRGB((math.Mod(PHASE+K_COLOR*float64(count), 255.0))/255.0, 1.0, 1.0)
+	return
 }
 
 func main() {
 
 	var count int
+	var r, g, b uint8
 
 	img := image.NewRGBA(image.Rect(0, 0, M, N))
-	fmt.Printf("%T", img)
 
 	for i := 0; i < N; i++ {
 		for j := 0; j < M; j++ {
@@ -94,13 +80,12 @@ func main() {
 				fmt.Println("Max Iterations reached")
 			}
 
-			//TODO: if count is 0 then return black and if is MAX_ITER then return white (or viceversa)
-			r, g, b := sadboxColor.HSVToRGB((math.Mod(PHASE+K_COLOR*float64(count), 255.0))/255.0, 1.0, 1.0)
+			r, g, b = getColor(count)
 			//fmt.Printf("r %v g %v b %v \n", r, g, b)
 
 			draw.Draw(img, image.Rect(j, i, j+1, i+1), &image.Uniform{color.RGBA{r, g, b, 255}}, image.ZP, draw.Src)
 		}
 	}
 
-	saveImg(img)
+	utils.SaveImg(img)
 }

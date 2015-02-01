@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/franleplant/juliaSets"
 	"image"
 	"image/color"
 	"image/draw"
@@ -10,6 +11,8 @@ import (
 )
 
 func main() {
+
+	juliaSets.Hi()
 
 	out, err := os.Create("./output.jpg")
 	if err != nil {
