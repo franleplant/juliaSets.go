@@ -38,11 +38,12 @@ func fz1(z complex128) complex128 {
 	return cmplx.Pow(z, 2) + 0.279 + 0.0i
 }
 func main() {
-
-	escapeTime(fz1)
+	getColor := utils.GetColorFactory(K_COLOR, PHASE)
+	escapeTime(fz1, getColor)
 }
 
-type CMatrix [N][M]complex128
+// Sufficiently big enough matrix
+type CMatrix [5000][5000]complex128
 
 type fzType func(z complex128) complex128
 
@@ -51,7 +52,7 @@ var fzi = fz1
 var m CMatrix
 var z *complex128
 
-func escapeTime(fz fzType) {
+func escapeTime(fz fzType, getColor utils.GetColorType) {
 
 	var count int
 	var r, g, b uint8
@@ -77,7 +78,7 @@ func escapeTime(fz fzType) {
 				fmt.Println("Max Iterations reached")
 			}
 
-			r, g, b = utils.GetColor(count, K_COLOR, PHASE)
+			r, g, b = getColor(count)
 			//fmt.Printf("r %v g %v b %v \n", r, g, b)
 
 			draw.Draw(img, image.Rect(j, i, j+1, i+1), &image.Uniform{color.RGBA{r, g, b, 255}}, image.ZP, draw.Src)
