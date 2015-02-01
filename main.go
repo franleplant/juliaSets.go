@@ -47,7 +47,7 @@ var fzi = fz1
 var m CMatrix
 var z *complex128
 
-func main() {
+func escapeTime() {
 
 	var count int
 	var r, g, b uint8
@@ -81,4 +81,9 @@ func main() {
 	}
 
 	utils.SaveImg(img)
+}
+
+func main() {
+
+	escapeTime()
 }
