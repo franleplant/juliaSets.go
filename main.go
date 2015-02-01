@@ -34,13 +34,17 @@ const (
 	K_COLOR        = 5.0
 )
 
-type CMatrix [N][M]complex128
-
-type fzType func(z complex128) complex128
-
 func fz1(z complex128) complex128 {
 	return cmplx.Pow(z, 2) + 0.279 + 0.0i
 }
+func main() {
+
+	escapeTime(fz1)
+}
+
+type CMatrix [N][M]complex128
+
+type fzType func(z complex128) complex128
 
 var fzi = fz1
 
@@ -81,9 +85,4 @@ func escapeTime(fz fzType) {
 	}
 
 	utils.SaveImg(img)
-}
-
-func main() {
-
-	escapeTime(fz1)
 }
