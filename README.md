@@ -1,5 +1,11 @@
 # JuliaSets Fractals in Go!
 
+  <img 
+    src="https://raw.githubusercontent.com/franleplant/juliaSets.go/master/fractals/secondDegree.jpg" 
+    alt="2nd Degree Fractal" width="400" height="400" 
+    style="" >
+
+
 ### Intro
 
 I have decided to learn somethings about Go lang and what a more perfect
