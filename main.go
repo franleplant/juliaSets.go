@@ -7,9 +7,8 @@ import (
 )
 
 const (
-	N       = 5000
-	MIN_x   = float64(-2.0)
-	c2      = -0.285 + 0.1i
+	N       = 1000
+	MIN_x   = float64(-1.0)
 	PHASE   = 150.0 //Start from Blue
 	K_COLOR = 10.0
 )
