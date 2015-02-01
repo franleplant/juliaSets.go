@@ -18,6 +18,7 @@ func main() {
 	}
 
 	img := image.NewRGBA(image.Rect(0, 0, 300, 300))
+	fmt.Printf("%T", img)
 	draw.Draw(img, image.Rect(0, 0, 10, 10), &image.Uniform{color.RGBA{0, 0, 255, 255}}, image.ZP, draw.Src)
 	draw.Draw(img, image.Rect(20, 20, 10, 10), &image.Uniform{color.RGBA{255, 0, 0, 255}}, image.ZP, draw.Src)
 

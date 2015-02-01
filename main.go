@@ -49,11 +49,31 @@ func fz1(z complex128) complex128 {
 var m CMatrix
 var z *complex128
 
+func saveImg(img *image.RGBA) {
+	out, err := os.Create("./output.jpg")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	var opt jpeg.Options
+
+	opt.Quality = 100
+	// ok, write out the data into the new JPEG file
+
+	// TODO: try png or other type of img encoding to see if it improves the quality
+	err = jpeg.Encode(out, img, &opt)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
 func main() {
 
 	var count int
 
 	img := image.NewRGBA(image.Rect(0, 0, M, N))
+	fmt.Printf("%T", img)
 
 	for i := 0; i < N; i++ {
 		for j := 0; j < M; j++ {
@@ -82,21 +102,5 @@ func main() {
 		}
 	}
 
-	//Image saving
-	out, err := os.Create("./output.jpg")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	var opt jpeg.Options
-
-	opt.Quality = 100
-	// ok, write out the data into the new JPEG file
-
-	// TODO: try png or other type of img encoding to see if it improves the quality
-	err = jpeg.Encode(out, img, &opt)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	saveImg(img)
 }
