@@ -36,7 +36,7 @@ const (
 
 type CMatrix [N][M]complex128
 
-type fz func(z complex128) complex128
+type fzType func(z complex128) complex128
 
 func fz1(z complex128) complex128 {
 	return cmplx.Pow(z, 2) + 0.279 + 0.0i
@@ -47,7 +47,7 @@ var fzi = fz1
 var m CMatrix
 var z *complex128
 
-func escapeTime() {
+func escapeTime(fz fzType) {
 
 	var count int
 	var r, g, b uint8
@@ -85,5 +85,5 @@ func escapeTime() {
 
 func main() {
 
-	escapeTime()
+	escapeTime(fz1)
 }
