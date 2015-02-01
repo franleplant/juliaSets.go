@@ -12,20 +12,18 @@ import (
 )
 
 const (
-	ER             = 1
-	N              = 500
-	MIN_x          = float64(-1.0)
-	c              = c7
-	c1             = -0.4 + 0.6i //nice
-	c2             = -0.285 + 0.1i
-	c3             = (1 - 1.618033987) + 0.0i //Golden ratio
-	c4             = -0.8 + 0.156i            //nice
-	c5             = 0.279 + 0.0i             //really nice
-	c6             = 0 + 0i                   //circle
-	c7             = -2 + 0i
-	MAX_ITERATIONS = 3000
-	PHASE          = 150.0
-	K_COLOR        = 5.0
+	N       = 500
+	MIN_x   = float64(-1.0)
+	c       = c7
+	c1      = -0.4 + 0.6i //nice
+	c2      = -0.285 + 0.1i
+	c3      = (1 - 1.618033987) + 0.0i //Golden ratio
+	c4      = -0.8 + 0.156i            //nice
+	c5      = 0.279 + 0.0i             //really nice
+	c6      = 0 + 0i                   //circle
+	c7      = -2 + 0i
+	PHASE   = 150.0
+	K_COLOR = 5.0
 )
 
 func fz1(z complex128) complex128 {
@@ -47,6 +45,10 @@ var m CMatrix
 var z *complex128
 
 func escapeTime(fz fzType, getColor utils.GetColorType, N int, MIN_x float64) {
+	const (
+		MAX_ITERATIONS = 3000
+		ER             = 1
+	)
 
 	var count int
 	var r, g, b uint8
