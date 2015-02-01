@@ -39,7 +39,7 @@ func fz1(z complex128) complex128 {
 }
 func main() {
 	getColor := utils.GetColorFactory(K_COLOR, PHASE)
-	escapeTime(fz1, getColor)
+	escapeTime(fz1, getColor, N)
 }
 
 // Sufficiently big enough matrix
@@ -52,10 +52,19 @@ var fzi = fz1
 var m CMatrix
 var z *complex128
 
-func escapeTime(fz fzType, getColor utils.GetColorType) {
+func escapeTime(fz fzType, getColor utils.GetColorType, N int) {
 
 	var count int
 	var r, g, b uint8
+	var (
+		M      = N
+		MIN_x  = float64(-1.0)
+		MAX_x  = -MIN_x
+		MIN_y  = MIN_x
+		MAX_y  = MAX_x
+		STEP_x = (MAX_x - MIN_y) / float64(M)
+		STEP_y = (MAX_y - MIN_y) / float64(N)
+	)
 
 	img := image.NewRGBA(image.Rect(0, 0, M, N))
 
